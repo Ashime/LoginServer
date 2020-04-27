@@ -9,13 +9,13 @@
 - SQL Server Management Studio (SSMS)
 
 ## Dependencies
-1) Netty Project
-<br>This 3rd party library improves performance and throughput by using NIO threads while doing server socketing and processing.
+### NettyIO
+This 3rd party library improves performance and throughput by using NIO threads while doing server socketing and processing.
 > <b>Download Link:</b> <https://netty.io/downloads.html><br>
 > <b>Javadocs:</b> <https://netty.io/4.1/api/index.html>
     
-2) ini4j
-<br>This 3rd party library provides the ability to read and write with ini files.
+### ini4j
+This 3rd party library provides the ability to read and write with ini files.
 > <b>Download Link:</b> <http://ini4j.sourceforge.net/download.html><br>
 > <b>Javadocs:</b> <http://ini4j.sourceforge.net/apidocs/index.html>
 
