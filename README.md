@@ -1,5 +1,7 @@
 # LoginServer
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6e144fb897194ae294c3a083aae5fa3e)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ashime/LoginServer&amp;utm_campaign=Badge_Grade)
+
 ## Requirements
 - Java Development Kit 8
 - Any Java IDE (IntelliJ IDEA or Eclipse IDE)
