@@ -1,9 +1,9 @@
 # LoginServer
 
 ## Requirements
- -Java Development Kit 8
- -Any Java IDE (IntelliJ IDEA or Eclipse IDE)
- -Microsoft SQL Database
+- Java Development Kit 8
+- Any Java IDE (IntelliJ IDEA or Eclipse IDE)
+- Microsoft SQL Database
 
 ## Getting Started
 To successfully run the project, please download and install everything from the top to the bottom of the list. If you already have some of this downloaded or installed, please skip the current step and move on to the next step. There is installation guides to help install some of these applications.
