@@ -8,17 +8,6 @@
 - Microsoft SQL Server (MSSQL) 2019 Express
 - SQL Server Management Studio (SSMS)
 
-## Dependencies
-### NettyIO
-This 3rd party library improves performance and throughput by using NIO threads while doing server socketing and processing.
-> <b>Download Link:</b> <https://netty.io/downloads.html><br>
-> <b>Javadocs:</b> <https://netty.io/4.1/api/index.html>
-    
-### ini4j
-This 3rd party library provides the ability to read and write with ini files.
-> <b>Download Link:</b> <http://ini4j.sourceforge.net/download.html><br>
-> <b>Javadocs:</b> <http://ini4j.sourceforge.net/apidocs/index.html>
-
 ## Getting Started
 To successfully run the project, please download and install everything from the top to the bottom of the list. If you already have some of this downloaded or installed, please skip the current step and move on to the next step. There is installation guides to help install some of these applications.
 
@@ -101,6 +90,17 @@ To be updated later.
  
 - Trusted Devices (In-Progress)
 <br> Allows users add up to five (5) trusted devices. The user can only login the game with a trusted device. A user is allowed to remove a trusted device if they are logged into a trusted device. Users can add one (1) temporary device to their list. The temporary device can access their account until they log out.
+
+## Dependencies
+### NettyIO
+This 3rd party library improves performance and throughput by using NIO threads while doing server socketing and processing.
+> <b>Download Link:</b> <https://netty.io/downloads.html><br>
+> <b>Javadocs:</b> <https://netty.io/4.1/api/index.html>
+    
+### ini4j
+This 3rd party library provides the ability to read and write with ini files.
+> <b>Download Link:</b> <http://ini4j.sourceforge.net/download.html><br>
+> <b>Javadocs:</b> <http://ini4j.sourceforge.net/apidocs/index.html>
 
 ## Documentation
 To be updated later.
