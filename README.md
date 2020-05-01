@@ -150,6 +150,10 @@ This 3rd party library provides the ability to read and write with ini files.
 > Google Drive (05/01/2020)
 > <br><b>LINK:</b> <https://drive.google.com/open?id=1KQJVbfN8LPupaxk8H0-p4V6R4Bhy4I4W>
 
-### SUN Online v1006 - Release
-> Google Drive ()
-> <br><b>LINL:</b> <>
+### SUN Online v1006 Server Files - Release
+> Google Drive (05/01/2020)
+> <br><b>LINK:</b> <https://drive.google.com/open?id=13eKRIBpCjGstzzSrsqQ4REhUnFUWkPiD>
+
+### SUN Online v1006 Server Files - ReadMe
+> Google Drive (05/01/2020)
+> <br><br>LINK:</b> <https://drive.google.com/open?id=1n3vp0U75T5nOHOjhPfHjKaOwAOW_9jLHTZ0KNNBp450>
