@@ -1,14 +1,33 @@
 package Sql;
 
+/*
+    @project LoginServer
+    @author Ashime
+    Created on 7/12/2017.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 import FileIO.IniFile;
 import Interface.Console;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// @author Ashime
 
 /*
 GENERAL INFORMATION:
@@ -17,82 +36,77 @@ GENERAL INFORMATION:
     Please see ../AuthServer/libs/ReadMe.txt for further information.
     >> Download Link: https://www.microsoft.com/en-us/download/details.aspx?id=55539
 
-TODO:
-1. Commenting
+TODO: Commenting
 */
 
 public class Connect
-{   
-    private static Connection connection;          
+{
+    private static Connection connection;
     private static String sqlPath;      // Connect pathway.
-    
-    IniFile ini = new IniFile();
-    Console console = new Console();
-    
-    
+
     public void testConnection()
-    {   
-        
+    {
+
         try
         {
-            sqlPath = "jdbc:sqlserver://" + ini.getSqlAddr() + ":" + ini.getSqlPort() + ";" + "Database=" + ini.getSqlDBN() + ";" + "Username=" + ini.getSqlUser() + ";" + "Password=" + ini.getSqlPass();
+            sqlPath = "jdbc:sqlserver://" + IniFile.getSqlAddr() + ":" + IniFile.getSqlPort() + ";" + "Database=" + IniFile.getSqlDBN() + ";" + "Username=" + IniFile.getSqlUser() + ";" + "Password=" + IniFile.getSqlPass();
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection((sqlPath));
 
-            console.displayMessage("INFO", "SQL test connection was successful!");
+            Console.displayMessage("INFO", "SQL test connection was successful!");
         }
-        catch (ClassNotFoundException ex)
-        {
+        catch (ClassNotFoundException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
-            console.displayMessage("ERR", "Corresponding JDBC Driver cannot be found or is corrupted!");
+            Console.displayMessage("ERR", "Corresponding JDBC Driver cannot be found or is corrupted!");
 
         }
-        catch (SQLException ex)
-        {
+        catch (SQLException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
-            console.displayMessage("ERR", "Cannot connect to SQL database. Check LoginServer.ini or SQL database configuration.");
+            Console.displayMessage("ERR", "Cannot connect to SQL database. Check LoginServer.ini or SQL database configuration.");
         }
         finally
         {
-            if(connection != null)
+            if (connection != null)
             {
-                try {
+                try
+                {
                     connection.close();
-                } catch (SQLException ex) {
+                }
+                catch (SQLException ex) {
                     Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
-    
+
     public void openConnection()
-    {   
+    {
         try
         {
             connection = DriverManager.getConnection((sqlPath));
         }
-        catch (SQLException ex)
-        {
+        catch (SQLException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
-            console.displayMessage("ERR", "Cannot connect to SQL database. Check LoginServer.ini or SQL database configuration.");
+            Console.displayMessage("ERR", "Cannot connect to SQL database. Check LoginServer.ini or SQL database configuration.");
         }
     }
-    
+
     public void closeConnection()
     {
-        if(connection != null)
+        if (connection != null)
         {
-            try {
+            try
+            {
                 connection.close();
-            } catch (SQLException ex) {
+            }
+            catch (SQLException ex) {
                 Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
     // Getter
-    public Connection getConnection()
-    {
+    public Connection getConnection() {
         return connection;
     }
 }

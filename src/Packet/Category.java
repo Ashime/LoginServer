@@ -20,5 +20,5 @@ package Packet;
 
 public interface Category
 {
-    byte LOGIN  = 0x33;
+    byte LOGIN = 0x33;
 }

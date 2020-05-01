@@ -19,6 +19,7 @@ package Packet.S2C;
 */
 
 import Packet.Category;
+import Packet.Coder.MessageEncoder;
 import Packet.Handlers.GetServerList;
 import Packet.Protocol;
 import Utility.Utility;
@@ -27,16 +28,16 @@ import java.util.ArrayList;
 
 public class AnsServerList implements Category, Protocol
 {
-    private static final int svrNumSize         = 1;
-    private static final int svrNameSize        = 32;
-    private static final byte unknown_svr       = 0x00;
+    private static final int svrNumSize = 1;
+    private static final int svrNameSize = 32;
+    private static final byte unknown_svr = 0x00;
 
-    private static final int chnNumSize         = 1;
-    private static final int chnNameSize        = 33;
-    private static final byte separator         = 0x00;
-    private static final byte terminator        = 0x01;
+    private static final int chnNumSize = 1;
+    private static final int chnNameSize = 33;
+    private static final byte separator = 0x00;
+    private static final byte terminator = 0x01;
 
-    private static final int tailInfoSize    = 3;
+    private static final int tailInfoSize = 3;
 
     /**
      * @return Returns a byte array packet with the server and channel info in one.
@@ -60,7 +61,7 @@ public class AnsServerList implements Category, Protocol
     }
 
     /**
-     * @param svrNum An integer number of all servers.
+     * @param svrNum   An integer number of all servers.
      * @param svrNames ArrayList of all server names.
      * @return A byte array of the server portion of the ansServerList packet with packet header attached.
      */
@@ -74,7 +75,7 @@ public class AnsServerList implements Category, Protocol
         messageSize += svrNumSize;
 
         // Cycle through the amount of severs there are.
-        for(int i = 1; i <= svrNum; i++)
+        for (int i = 1; i <= svrNum; i++)
         {
             // Add the size of the default name size (32 bytes).
             messageSize += svrNameSize;
@@ -82,7 +83,7 @@ public class AnsServerList implements Category, Protocol
             messageSize += tailInfoSize;
 
             // If it's not the last server to add, then add size of separator (1 byte).
-            if(i != svrNum)
+            if (i != svrNum)
                 messageSize += Utility.getSize(separator);
         }
 
@@ -94,20 +95,19 @@ public class AnsServerList implements Category, Protocol
         int outputIndex = 1;
 
         // Cycle through the svrName arraylist to build the SvrList packet.
-        for(int j = 1; j <= svrNames.size(); j++)
+        for (int j = 1; j <= svrNames.size(); j++)
         {
             // Push svrName to char array (temp).
             char[] temp = svrNames.get(j - 1).toCharArray();
 
             // Cycle through temp and convert each char into a byte.
-            for(int k = 0; k < temp.length; k++)
+            for (int k = 0; k < temp.length; k++)
             {
                 output[outputIndex] = (byte) temp[k];
                 outputIndex += 1;
             }
 
-            // Need to reset outputIndex and set it to svrNameSize (32) + 1. Otherwise it will be
-            // temp.length + svrNameSize + 1.
+            // Need to reset outputIndex and set it to svrNameSize (32). Otherwise it will be temp.length + svrNameSize.
             outputIndex += (svrNameSize - temp.length);
 
             // Assemble the tail.
@@ -116,21 +116,20 @@ public class AnsServerList implements Category, Protocol
             output[outputIndex + 2] = unknown_svr;
 
             // If there is more than one server, then do outputIndex + 4 (tail = 3 and 1 = separator).
-            if(j != svrNum)
+            if (j != svrNum)
                 outputIndex += 4;
         }
 
         // Build packet header and return packet.
-        return Utility.createLongPacket(Category.LOGIN, Protocol.S2C_ansSrvList_Srv, output);
+        return MessageEncoder.createLongPacket(Category.LOGIN, Protocol.S2C_ansSrvList_Srv, output);
     }
 
     /**
-     * @param chnNum An integer number of all channels.
+     * @param chnNum         An integer number of all channels.
      * @param chnSvrRelation ArrayList of all channels with their relation to what servers.
      * @return A byte array of the channel portion of the ansServerList packet with packet header attached.
      */
-    private static byte[] assembleChannelList(int chnNum, ArrayList<String> chnSvrRelation)
-    {
+    private static byte[] assembleChannelList(int chnNum, ArrayList<String> chnSvrRelation) {
         byte[] output;
         // Getting size for output.
         int messageSize = 0;
@@ -139,15 +138,14 @@ public class AnsServerList implements Category, Protocol
         messageSize += chnNumSize;
 
         // Cycle through the amount of channels there are.
-        for(int i = 1; i <= chnNum; i++)
-        {
+        for (int i = 1; i <= chnNum; i++) {
             // Add the size of the default name size (33 bytes).
             messageSize += chnNameSize;
             // Add the size of the default tail size (3 bytes).
             messageSize += tailInfoSize;
 
             // If it's not the last channel to add, then add size of separator (1 byte).
-            if(i != chnNum)
+            if (i != chnNum)
                 messageSize += Utility.getSize(separator);
         }
 
@@ -163,26 +161,22 @@ public class AnsServerList implements Category, Protocol
         int prevSvrNum = Integer.parseInt(chnSvrRelation.get(0));
 
         // Cycle through the chnSvrRelation arraylist to build the channel portion of the SvrList packet.
-        for(int j = 0; j < chnSvrRelation.size(); j++)
-        {
+        for (int j = 0; j < chnSvrRelation.size(); j++) {
             // Checks if the current value in chnSvrRelation is a number and doesn't match the index 0 value.
             // Means that current chnSvrRelation value is a new server index.
-            if(Utility.isStringInt(chnSvrRelation.get(j)) && !chnSvrRelation.get(j).matches(chnSvrRelation.get(1)))
-            {
+            if (Utility.isStringInt(chnSvrRelation.get(j)) && !chnSvrRelation.get(j).matches(chnSvrRelation.get(1))) {
                 // Change the prevSvrNum to new svrNum.
                 prevSvrNum = Integer.parseInt(chnSvrRelation.get(j));
                 // Reset the chnIndex due to server change.
                 chnIndex = 1;
             }
             // Checks to see if current chnSvrRelation is not a number, therefore there is more channels.
-            else if(!Utility.isStringInt(chnSvrRelation.get(j)))
-            {
+            else if (!Utility.isStringInt(chnSvrRelation.get(j))) {
                 // Push channel name to char array (temp).
                 char[] temp = chnSvrRelation.get(j).toCharArray();
 
                 // Cycle through temp and convert each char into a byte.
-                for(int k = 0; k < temp.length; k++)
-                {
+                for (int k = 0; k < temp.length; k++) {
                     output[outputIndex] = (byte) temp[k];
                     outputIndex += 1;
                 }
@@ -198,14 +192,13 @@ public class AnsServerList implements Category, Protocol
 
                 // If there is more than one channel, then do outputIndex + 4 (tail = 3 and 1 = separator)
                 // and adjust chnIndex.
-                if(j != chnNum)
-                {
+                if (j != chnNum) {
                     outputIndex += 4;
                     chnIndex += 1;
                 }
             }
         }
         // Build packet header and return packet.
-        return Utility.createLongPacket(Category.LOGIN, Protocol.S2C_ansSrvList_Chn, output);
+        return MessageEncoder.createLongPacket(Category.LOGIN, Protocol.S2C_ansSrvList_Chn, output);
     }
 }

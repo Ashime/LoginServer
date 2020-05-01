@@ -1,4 +1,5 @@
 package Packet.S2C;
+
 /*
     @project LoginServer
     @author Ashime
@@ -19,9 +20,9 @@ package Packet.S2C;
 */
 
 import Packet.Category;
+import Packet.Coder.MessageEncoder;
 import Packet.Handlers.VerifyIpProtocol;
 import Packet.Protocol;
-import Utility.Utility;
 
 public class AnsVerifyPacket implements Category, Protocol
 {
@@ -29,11 +30,11 @@ public class AnsVerifyPacket implements Category, Protocol
     {
         byte message;
 
-        if(VerifyIpProtocol.verify(inPacket))
+        if (VerifyIpProtocol.verify(inPacket))
             message = 0x00;
         else
             message = 0x001;
 
-        return Utility.createShortPacket(Category.LOGIN, Protocol.S2C_ansVerify, message);
+        return MessageEncoder.createShortPacket(Category.LOGIN, Protocol.S2C_ansVerify, message);
     }
 }

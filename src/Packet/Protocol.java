@@ -20,14 +20,14 @@ package Packet;
 
 public interface Protocol
 {
-    byte S2C_ansReady           = 0x00;
-    byte C2S_askVerify          = 0x01;
-    byte S2C_ansVerify          = 0x02;
-    byte C2S_askAuthUser        = 0x03;
-    byte S2C_ansAuthUser        = 0x0E;
-    byte C2S_askSrvList         = 0x0F;
-    byte S2C_ansSrvList_Srv     = 0x11;
-    byte S2C_ansSrvList_Chn     = 0x12;
-    byte C2S_askSrvSelect       = 0x13;
-    byte S2C_ansSrvSelect       = 0x1A;
+    byte S2C_ansReady       = 0x00;
+    byte C2S_askVerify      = 0x01;
+    byte S2C_ansVerify      = 0x02;
+    byte C2S_askAuthUser    = 0x03;
+    byte S2C_ansAuthUser    = 0x0E;
+    byte C2S_askSrvList     = 0x0F;
+    byte S2C_ansSrvList_Srv = 0x11;
+    byte S2C_ansSrvList_Chn = 0x12;
+    byte C2S_askSrvSelect   = 0x13;
+    byte S2C_ansSrvSelect   = 0x1A;
 }

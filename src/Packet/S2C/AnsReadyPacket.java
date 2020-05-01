@@ -19,13 +19,13 @@ package Packet.S2C;
 */
 
 import Packet.Category;
+import Packet.Coder.MessageEncoder;
 import Packet.Protocol;
-import Utility.Utility;
 
 public class AnsReadyPacket implements Category, Protocol
 {
     public byte[] createPacket(byte[] encKey)
     {
-        return Utility.createLongPacket(Category.LOGIN, Protocol.S2C_ansReady, encKey);
+        return MessageEncoder.createLongPacket(Category.LOGIN, Protocol.S2C_ansReady, encKey);
     }
 }

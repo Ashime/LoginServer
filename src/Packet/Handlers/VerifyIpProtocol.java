@@ -24,16 +24,12 @@ import Utility.Convert;
 
 public class VerifyIpProtocol
 {
-    public static boolean verify (byte[] input)
+    public static boolean verify(byte[] input)
     {
         String hexPacket = Convert.byteArrayToHexString(input);
         String serverIP = IniFile.getConnectionIP().replaceAll(".", "");
         String clientProtocol = IniFile.getProtocol().replaceAll(".", "");
 
-        if (hexPacket.contains(clientProtocol) && hexPacket.contains(serverIP))
-            return true;
-        else
-            return false;
-
+        return hexPacket.contains(clientProtocol) && hexPacket.contains(serverIP);
     }
 }

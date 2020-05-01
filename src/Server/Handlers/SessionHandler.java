@@ -1,6 +1,23 @@
 package Server.Handlers;
 
-// @author Ashime
+/*
+    @project LoginServer
+    @author Ashime
+    Created on 6/20/2020.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
 
 import Security.TEA;
 import Utility.Convert;
@@ -19,16 +36,16 @@ connected clients. Output: IP:Port,Key
 
 public class SessionHandler extends ChannelDuplexHandler
 {
-    private static ArrayList<String> clientSession = new ArrayList<String>();
+    private static final ArrayList<String> clientSession = new ArrayList<String>();
     private static String user;
-    
+
     @Override
     public void channelActive(ChannelHandlerContext ctx)
     {
         addClient(ctx.channel().remoteAddress());
         ctx.fireChannelActive();
     }
-    
+
     @Override
     public void channelInactive(ChannelHandlerContext ctx)
     {
@@ -36,31 +53,30 @@ public class SessionHandler extends ChannelDuplexHandler
         removeClient(client);
         ctx.close();
     }
-    
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
     {
         byte[] inPacket = (byte[]) msg;
         ctx.fireChannelRead(inPacket);
     }
-    
+
     @Override
-     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)
+    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)
     {
-        if(!ctx.channel().isOpen() || !ctx.channel().isActive())
+        if (!ctx.channel().isOpen() || !ctx.channel().isActive())
             ctx.fireChannelInactive();
-        
+
         ctx.writeAndFlush(msg);
     }
-    
+
     public void addClient(SocketAddress address)
     {
         user = address.toString() + "," + Convert.byteArrayToHexString(TEA.generateKey());
         clientSession.add(user);
     }
-    
-    public void removeClient(String user)
-    {
+
+    public void removeClient(String user) {
         clientSession.remove(user);
     }
 
@@ -68,9 +84,9 @@ public class SessionHandler extends ChannelDuplexHandler
     {
         String user = "";
 
-        for(String temp : clientSession)
+        for (String temp : clientSession)
         {
-            if(temp.contains(address.toString()))
+            if (temp.contains(address.toString()))
             {
                 user = temp;
                 break;
@@ -84,9 +100,9 @@ public class SessionHandler extends ChannelDuplexHandler
     {
         byte[] key = new byte[4];
 
-        for(String temp: clientSession)
+        for (String temp : clientSession)
         {
-            if(temp.contains(address.toString()))
+            if (temp.contains(address.toString()))
             {
                 String[] userInfo = temp.split(",");
                 key = Convert.hexStringToByteArray(userInfo[1]);
@@ -96,8 +112,7 @@ public class SessionHandler extends ChannelDuplexHandler
         return key;
     }
 
-    public static int getActiveUsers()
-    {
+    public static int getActiveUsers() {
         return clientSession.size();
     }
 }

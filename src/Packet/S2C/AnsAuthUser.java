@@ -20,21 +20,21 @@ package Packet.S2C;
 */
 
 import Packet.Category;
+import Packet.Coder.MessageEncoder;
 import Packet.Handlers.AuthUser;
 import Packet.Protocol;
-import Utility.Utility;
 
 public class AnsAuthUser implements Category, Protocol
 {
-    public static byte[] createPacket(byte[] input, byte[] encKey)
+    public static byte[] createPacket(byte[] input, byte[] encKey, String ipAddress)
     {
         byte message;
 
-        if(AuthUser.authUserAndPassword(input, encKey))
+        if (AuthUser.authUserAndPassword(input, encKey, ipAddress))
             message = 0x00;
         else
             message = 0x01;
 
-        return Utility.createShortPacket(Category.LOGIN, Protocol.S2C_ansAuthUser, message);
+        return MessageEncoder.createShortPacket(Category.LOGIN, Protocol.S2C_ansAuthUser, message);
     }
 }

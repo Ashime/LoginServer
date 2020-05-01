@@ -1,4 +1,4 @@
-package Packet;
+package Packet.Coder;
 /*
     @project LoginServer
     @author Ashime
@@ -19,17 +19,18 @@ package Packet;
 */
 
 import FileIO.Log;
+import Packet.Category;
+import Packet.Protocol;
 import Packet.S2C.AnsAuthUser;
 import Packet.S2C.AnsServerList;
+import Packet.S2C.AnsServerSelect;
 import Packet.S2C.AnsVerifyPacket;
-import Utility.Convert;
 
 public class MessageDecoder implements Category, Protocol
 {
     private static byte[] userEncKey = new byte[4];
-    private static byte[] outPacket = { };
-
-    private static LoginProtocol login = new LoginProtocol();
+    private static String userIpAddress;
+    private static byte[] outPacket = {};
 
     public static byte[] decodeMessage(byte[] inPacket)
     {
@@ -37,26 +38,34 @@ public class MessageDecoder implements Category, Protocol
         {
             case Protocol.C2S_askVerify:
             {
+                Log.formatLog(inPacket, "[C2S] askVerify");
                 outPacket = AnsVerifyPacket.createPacket(inPacket);
+                Log.formatLog(outPacket, "[S2C] ansVerify");
                 break;
             }
             case Protocol.C2S_askAuthUser:
             {
-                outPacket = AnsAuthUser.createPacket(inPacket, userEncKey);
+                Log.formatLog(inPacket, "[C2S] askAuthUser");
+                outPacket = AnsAuthUser.createPacket(inPacket, userEncKey, userIpAddress);
+                Log.formatLog(outPacket, "[S2C] ansAuthUser");
                 break;
             }
             case Protocol.C2S_askSrvList:
             {
+                Log.formatLog(inPacket, "[C2S] askServerList");
                 outPacket = AnsServerList.createPacket();
+                Log.formatLog(outPacket, "[S2C] ansServerList");
                 break;
             }
-            case 19: {
-                Log.formatLog(inPacket, "[C2S] Confirmed Server Selection");
-                login.createPacket("GS TRANSFER");
-                outPacket = login.getCreatedPacket();
+            case Protocol.C2S_askSrvSelect:
+            {
+                Log.formatLog(inPacket, "[C2S] askServerSelect");
+                outPacket = AnsServerSelect.createPacket(inPacket);
+                Log.formatLog(outPacket, "[S2C] ansServerSelect");
                 break;
             }
-            default: {
+            default:
+            {
                 Log.formatLog(inPacket, "[C2S] Unknown Packet");
                 break;
             }
@@ -65,7 +74,13 @@ public class MessageDecoder implements Category, Protocol
         return outPacket;
     }
 
+
+    // SETTERS
     public static void setUserEncKey(byte[] userEncKey) {
         MessageDecoder.userEncKey = userEncKey;
+    }
+
+    public static void setUserIpAddress(String userIpAddress) {
+        MessageDecoder.userIpAddress = userIpAddress;
     }
 }

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/postgresql-42.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/ini4j-0.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/netty-all-4.1.36.Final-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mssql-jdbc-6.2.2.jre8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mysql-connector-java-5.1.45-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/geoip2-2.12.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/netty-all-4.1.36.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/netty-all-4.1.36.Final-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

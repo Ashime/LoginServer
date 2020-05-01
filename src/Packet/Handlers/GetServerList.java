@@ -26,17 +26,15 @@ import java.util.ArrayList;
 
 public class GetServerList implements Category, Protocol
 {
-    private static Query query = new Query();
+    private static final Query query = new Query();
 
     private static int serverNum, channelNum;
     private static ArrayList<String> serverNames = new ArrayList<>();
-    private static ArrayList<String> channelNames = new ArrayList<>();
     private static ArrayList<String> serverToChannelRelation = new ArrayList<>();
 
     public static void getList()
     {
         query.getServerList();
-
         getSrvChnInfo(query.getQueryResults());
     }
 
@@ -45,7 +43,6 @@ public class GetServerList implements Category, Protocol
         serverNum = checkSvrCount(svrList);
         serverNames = getServerNames(svrList);
         channelNum = checkChnCount(svrList);
-//        channelNames = getChannelNames(svrList);
         serverToChannelRelation = getServerToChannelRelation(svrList);
     }
 
@@ -53,11 +50,11 @@ public class GetServerList implements Category, Protocol
     {
         int svrNum = 0;
 
-        for(int i = 0; i < svrList.size(); i += 4)
+        for (int i = 0; i < svrList.size(); i += 4)
         {
-            if(svrNum != 0)
+            if (svrNum != 0)
             {
-                if(!(svrNum == Integer.parseInt(svrList.get(i))))
+                if (svrNum != Integer.parseInt(svrList.get(i)))
                     svrNum = Integer.parseInt(svrList.get(i));
             }
             else
@@ -73,11 +70,11 @@ public class GetServerList implements Category, Protocol
         ArrayList<String> svrName = new ArrayList<>();
         int j = 0;
 
-        for(int i = 1; i < svrList.size(); i += 4)
+        for (int i = 1; i < svrList.size(); i += 4)
         {
-            if(i == 1)
+            if (i == 1)
                 svrName.add(svrList.get(i));
-            else if(!svrName.get(j).matches(svrList.get(i)))
+            else if (!svrName.get(j).matches(svrList.get(i)))
             {
                 svrName.add(svrList.get(i));
                 j++;
@@ -91,59 +88,34 @@ public class GetServerList implements Category, Protocol
     {
         int chnNum = 0;
 
-        for(int i = 2; i < svrList.size(); i += 4)
-        {
-//            if(!(chnNum == Integer.parseInt(svrList.get(i))))
-//                chnNum = Integer.parseInt(svrList.get(i));
-//            else
-//                chnNum = Integer.parseInt(svrList.get(i));
+        for (int i = 2; i < svrList.size(); i += 4)
             chnNum++;
-        }
 
         return chnNum;
     }
 
-//    private static ArrayList<String> getChannelNames(ArrayList<String> svrList)
-//    {
-//        ArrayList<String> chnName = new ArrayList<>();
-//        int j = 0;
-//
-//        for(int i = 3; i < svrList.size(); i += 4)
-//        {
-//            if(i == 3)
-//                chnName.add(svrList.get(i));
-//            else if(!chnName.get(j).matches(svrList.get(i)))
-//            {
-//                chnName.add(svrList.get(i));
-//                j++;
-//            }
-//        }
-//
-//        return chnName;
-//    }
-
-    private static ArrayList<String>getServerToChannelRelation(ArrayList<String> svrList)
+    private static ArrayList<String> getServerToChannelRelation(ArrayList<String> svrList)
     {
-        ArrayList<String> serversAndChannels = new ArrayList<String>() { };
+        ArrayList<String> serversAndChannels = new ArrayList<>();
         int index = 0;
 
-        for(int i = 0; i < svrList.size(); i += 4)
+        for (int i = 0; i < svrList.size(); i += 4)
         {
-            if(i == 0)
+            if (i == 0)
             {
                 serversAndChannels.add(svrList.get(i));
-                serversAndChannels.add(svrList.get(i+3));
+                serversAndChannels.add(svrList.get(i + 3));
             }
-            else if(serversAndChannels.get(index).matches(svrList.get(i)))
+            else if (serversAndChannels.get(index).matches(svrList.get(i)))
             {
-                if(!(serversAndChannels.get(index+1).matches(svrList.get(i+3))))
-                    serversAndChannels.add(svrList.get(i+3));
+                if (!(serversAndChannels.get(index + 1).matches(svrList.get(i + 3))))
+                    serversAndChannels.add(svrList.get(i + 3));
             }
-            else if(!(serversAndChannels.get(index).matches(svrList.get(i))))
+            else if (!(serversAndChannels.get(index).matches(svrList.get(i))))
             {
                 serversAndChannels.add(svrList.get(i));
                 index = (serversAndChannels.size() - 1);
-                serversAndChannels.add(svrList.get(i+3));
+                serversAndChannels.add(svrList.get(i + 3));
             }
         }
 
@@ -162,10 +134,6 @@ public class GetServerList implements Category, Protocol
     public static ArrayList<String> getServerNames() {
         return serverNames;
     }
-
-//    public static ArrayList<String> getChannelNames() {
-//        return channelNames;
-//    }
 
     public static ArrayList<String> getServerToChannelRelation() {
         return serverToChannelRelation;

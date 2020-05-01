@@ -20,38 +20,36 @@ package Packet.Handlers;
 
 import FileIO.IniFile;
 import Security.TEA;
-import Utility.Utility;
-import Utility.Convert;
 import Sql.Query;
+import Utility.Convert;
+import Utility.Utility;
 
 import java.util.Arrays;
 
 public class AuthUser
 {
-    private static Query query = new Query();
+    private static final Query query = new Query();
 
-    public static boolean authUserAndPassword(byte[] input, byte[] key)
+    public static boolean authUserAndPassword(byte[] input, byte[] key, String ipAddress)
     {
         byte[] username = Arrays.copyOfRange(input, 6, 56);
         byte[] shortenUsername = Arrays.copyOfRange(username, 0, Utility.indexOf(username, "0"));
+        byte[] password = Arrays.copyOfRange(input, 57, 81);
+        byte[] dPassword = TEA.passwordDecode(password, key);
 
-        if(IniFile.isNoLoginAuth())
+        if (IniFile.isTrustedDevices())
         {
-            if(query.FindUser(Convert.byteArrayToUTF8String(shortenUsername)) == 1)
-                return false;
-            else
-                return true;
+            query.getStoredTrustedDevices(Convert.byteArrayToUTF8String(shortenUsername));
+
+            for (String temp : Query.getTrustedDevices())
+            {
+                if (temp.matches(ipAddress))
+                    return query.AuthUser(Convert.byteArrayToUTF8String(shortenUsername), Convert.byteArrayToUTF8String(dPassword));
+            }
+
+            return false;
         }
         else
-        {
-            byte[] password = Arrays.copyOfRange(input, 57, 81);
-            byte[] dPassword = TEA.passwordDecode(password, key);
-            System.out.println("dPassword: " + Convert.byteArrayToHexString(dPassword));
-
-            if (query.AuthUser(Convert.byteArrayToUTF8String(shortenUsername), Convert.byteArrayToUTF8String(dPassword)))
-                return true;
-            else
-                return false;
-        }
+            return query.AuthUser(Convert.byteArrayToUTF8String(shortenUsername), Convert.byteArrayToUTF8String(dPassword));
     }
 }
