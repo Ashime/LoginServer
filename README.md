@@ -3,10 +3,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6e144fb897194ae294c3a083aae5fa3e)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ashime/LoginServer&amp;utm_campaign=Badge_Grade)
 
 ## Requirements
- - Java Development Kit 8
- - Eclipse or IntelliJ IDEA Community
- - Microsoft SQL Server (MSSQL) 2019 Express
- - SQL Server Management Studio (SSMS)
+- Java Development Kit 8
+- Eclipse or IntelliJ IDEA Community
+- Microsoft SQL Server (MSSQL) 2019 Express
+- SQL Server Management Studio (SSMS)
 
 ## Getting Started
 To successfully run the project, please download and install everything from the top to the bottom of the list. If you already have some of this downloaded or installed, please skip the current step and move on to the next step. There is installation guides to help install some of these applications.
@@ -76,29 +76,29 @@ To successfully run the project, please download and install everything from the
 <br><b>LINK:</b> <https://docs.microsoft.com/en-us/biztalk/core/how-to-back-up-and-restore-sql-server-logins>
 
 ## Features
- - <b>Unique IP Filter</b>
+- <b>Unique IP Filter</b>
 <br>Prevent users from connecting multiple times on the same IP. This feature can be turned on/off in the Common.ini under the Security section.
 
- - <b>MAC Address Filter</b>
+- <b>MAC Address Filter</b>
  <br> Prevents banned users from connecting to the LoginServer. All connections and packets will be dropped. This feature cannot be turned off.
  
-  - <b>SHA512 w/ Salt and HMAC key</b>
- <br>All passwords are encrypted in SHA512 with each user's individual salt and the server's customizable HMAC key. All user's password are stored encrypted in the database. The HMAC key can be changed in the LoginServer.ini under the Security section. The HMAC key is recommended to be 128 bytes long.
+- <b>SHA512 w/ Salt and HMAC key</b>
+<br> All passwords are encrypted in SHA512 with each user's individual salt and the server's customizable HMAC key. All user's password are stored encrypted in the database. The HMAC key can be changed in the LoginServer.ini under the Security section. The HMAC key is recommended to be 128 bytes long.
  
-  - <b>Trusted Devices</b>
+- <b>Trusted Devices</b>
 <br> Allows users add up to five (5) trusted devices. The user can only login the game with a trusted device. A user is allowed to remove a trusted device if they are logged into a trusted device. Users can add one (1) temporary device to their list. The temporary device can access their account until they log out.
  
-  - <b>Dynamic Packet System (95% complete)</b>
- <br> The LoginServer responses to the client's requests by dynamically creating packets based on the    <br> user's information. Majority (95%) of the packets or packet information are not hard-coded.
+- <b>Dynamic Packet System (95% complete)</b>
+<br> The LoginServer responses to the client's requests by dynamically creating packets based on the     user's information. Majority (95%) of the packets or packet information are not hard-coded.
  
-  - <b>Dynamic TEA (Tiny Encryption Algorithm) keys</b>
+- <b>Dynamic TEA (Tiny Encryption Algorithm) keys</b>
  <br> The LoginServer creates a secure random key for TEA at the start of each user's active session. The keys are used to decrypt packet information from the client.
 
 ## Goals
- - <b>Dynamic Packet System (100%)</b>
+- <b>Dynamic Packet System (100%)</b>
 <br> Further understanding the server packet data to remove all hard coded packets or packet information. Please check the AnsServerSelect and AnsServerList classes to review hard coded packet information.
 
- - <b>Refactoring and Adding New Features</b>
+- <b>Refactoring and Adding New Features</b>
 <br> Improving on the codes structure and implementing new features.
 
 ## Dependencies
