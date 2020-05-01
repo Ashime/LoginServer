@@ -5,8 +5,8 @@
 ## Requirements
 - Java Development Kit 8
 - Eclipse or IntelliJ IDEA Community
-- Microsoft SQL server (MSSQL) 2019 Express
-- SQL server Management Studio (SSMS)
+- Microsoft SQL Server (MSSQL) 2019 Express
+- SQL Server Management Studio (SSMS)
 
 ## Getting Started
 To successfully run the project, please download and install everything from the top to the bottom of the list. If you already have some of this downloaded or installed, please skip the current step and move on to the next step. There is installation guides to help install some of these applications.
@@ -28,14 +28,14 @@ To successfully run the project, please download and install everything from the
  2) Install IntelliJ IDEA. Please folow the Standalone section in this installation guide in the link below.
  <br><b>LINK:</b> <https://www.jetbrains.com/help/idea/installation-guide.html#>
  
- #### Microsoft SQL server (MSSQL) 2019 Express
- 1) Download Microsoft SQL server 2019 Express (<https://go.microsoft.com/fwlink/?linkid=866658>)
- 2) Install Microsoft SQL server 2019 Express. Please follow the installation guide in the link below.
+ #### Microsoft SQL Server (MSSQL) 2019 Express
+ 1) Download Microsoft SQL Server 2019 Express (<https://go.microsoft.com/fwlink/?linkid=866658>)
+ 2) Install Microsoft SQL Server 2019 Express. Please follow the installation guide in the link below.
 <br><b>LINK:</b> <https://www.sqlshack.com/sql-server-2019-overview-and-installation/>
  
- #### SQL server Management Studio (SSMS)
-1) Download SQL server Management Studio (<https://aka.ms/ssmsfullsetup>)
-2) Install SQL server Management Studio. Please follow the installation guide starting at the section called "Download and install SSMS Release 18 Preview 4" near the bottom of the page in the link below. Only follow the installing instruction.
+ #### SQL Server Management Studio (SSMS)
+1) Download SQL Server Management Studio (<https://aka.ms/ssmsfullsetup>)
+2) Install SQL Server Management Studio. Please follow the installation guide starting at the section called "Download and install SSMS Release 18 Preview 4" near the bottom of the page in the link below. Only follow the installing instruction.
 <br><b>LINK:</b> <https://www.sqlshack.com/sql-server-2019-overview-and-installation/>
  
  ### Setting up and Configuring
@@ -64,7 +64,7 @@ To successfully run the project, please download and install everything from the
 6) Click Clone at the bottom.
 
 #### Configuring MSSQL 2019 Express
-1) Open SSMS (SQL server Management Studio).
+1) Open SSMS (SQL Server Management Studio).
 2) Sign in through Windows Authentication.
 3) Right click on Databases and click Restore Database...
 <br><b>NOTE:</b> The database can be downloaded from the Files section below.
@@ -76,29 +76,29 @@ To successfully run the project, please download and install everything from the
 <br><b>LINK:</b> <https://docs.microsoft.com/en-us/biztalk/core/how-to-back-up-and-restore-sql-server-logins>
 
 ## Features
-- Unique IP Filter
-<br>Prevent users from connecting multiple times on the same IP. This feature can be turned on/off in the Common.ini under the security section.
+- <b>Unique IP Filter</b>
+<br>Prevent users from connecting multiple times on the same IP. This feature can be turned on/off in the Common.ini under the Security section.
 
-- MAC Address Filter
+- <b>MAC Address Filter</b>
  <br> Prevents banned users from connecting to the LoginServer. All connections and packets will be dropped. This feature cannot be turned off.
  
- - SHA512 w/ Salt and HMAC key
- <br>All passwords are encrypted in SHA512 with each user's individual salt and the server's customizable HMAC key. All user's password are stored encrypted in the database. The HMAC key can be changed in the LoginServer.ini under the security section. The HMAC key is recommended to be 128 bytes long.
+- <b>SHA512 w/ Salt and HMAC key</b>
+<br> All passwords are encrypted in SHA512 with each user's individual salt and the server's customizable HMAC key. All user's password are stored encrypted in the database. The HMAC key can be changed in the LoginServer.ini under the Security section. The HMAC key is recommended to be 128 bytes long.
  
- - Trusted Devices
+- <b>Trusted Devices</b>
 <br> Allows users add up to five (5) trusted devices. The user can only login the game with a trusted device. A user is allowed to remove a trusted device if they are logged into a trusted device. Users can add one (1) temporary device to their list. The temporary device can access their account until they log out.
  
- - Dynamic packet System (95% complete)
- <br> The LoginServer responses to the client's requests by dynamically creating packets based on the user's information. Majority (95%) of the packets or packet information are not hard-coded.
+- <b>Dynamic Packet System (95% complete)</b>
+<br> The LoginServer responses to the client's requests by dynamically creating packets based on the     user's information. Majority (95%) of the packets or packet information are not hard-coded.
  
- - Dynamic TEA (Tiny Encryption Algorithm) keys
+- <b>Dynamic TEA (Tiny Encryption Algorithm) keys</b>
  <br> The LoginServer creates a secure random key for TEA at the start of each user's active session. The keys are used to decrypt packet information from the client.
 
 ## Goals
-- Dynamic packet System (100%)
+- <b>Dynamic Packet System (100%)</b>
 <br> Further understanding the server packet data to remove all hard coded packets or packet information. Please check the AnsServerSelect and AnsServerList classes to review hard coded packet information.
 
-- Refactoring and Adding New Features
+- <b>Refactoring and Adding New Features</b>
 <br> Improving on the codes structure and implementing new features.
 
 ## Dependencies
@@ -113,7 +113,7 @@ This 3rd party library provides the ability to read and write with ini files.
 > <b>Javadocs:</b> <http://ini4j.sourceforge.net/apidocs/index.html>
 
 ## Documentation
-### packet Structure - General Info
+### Packet Structure - General Info
 > Google Drive (04/30/2020)
 > <br><b>LINK:</b> <https://drive.google.com/open?id=1QV0VcxBSgxViPs7iNgzVv2JCfXXGK6q31b68nk8Hq_I>
 
@@ -121,13 +121,21 @@ This 3rd party library provides the ability to read and write with ini files.
 > Google Drive (04/30/2020)
 > <br><b>LINK:</b> <https://drive.google.com/open?id=1TsGWK_btRPwFd9AKnjrKfYj90Bk0-yc0nVdO_W3A628>
 
-### server Packets
+### Server Packets
 > Google Drive (04/30/2020)
 > <br><b>LINK:</b> <https://drive.google.com/open?id=1d1GMJrXX2EmDce9PQWMeo6Dg30QY0Hc1lZRb-BreVNk>
 
-### Login server - General Info
+### Login Server - General Info
 > Google Drive (04/30/2020)
 > <br><b>LINK:</b> <https://drive.google.com/open?id=19MXwaweLQj383rBZnmSIO9iw57KXVMpN_lZn3gpZ6Ks>
+
+## Notes
+### Client Login - Default
+> Username - 123456
+> <br>Password  - 123456
+
+### Trusted Device - Default
+> IP Address - 127.0.0.1
 
 ## Files
 ### SUNOnline_v1007 Database
