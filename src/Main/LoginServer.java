@@ -30,17 +30,6 @@ GENERAL INFORMATION:
 1. Operating Systems Supported
     a. Windows
         This application fully supports Windows 10.
-
-TODO:
-1. Upgrading to Java FX.
-2. Allow Linux support the following classes:
-    a. NettyNio.java (NettyNio NioServer)
-        Windows: NioEventLoopGroup
-        Linux: EpollEventLoopGroup
-
-Current user (client):
-Username - 123456
-Password - 123456
 */
 
 public class LoginServer
