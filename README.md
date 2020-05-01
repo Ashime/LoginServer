@@ -129,6 +129,14 @@ This 3rd party library provides the ability to read and write with ini files.
 > Google Drive (04/30/2020)
 > <br><b>LINK:</b> <https://drive.google.com/open?id=19MXwaweLQj383rBZnmSIO9iw57KXVMpN_lZn3gpZ6Ks>
 
+## Notes
+### Client Login - Default
+> Username - 123456
+> <br>Password  - 123456
+
+### Trusted Device - Default
+> IP Address - 127.0.0.1
+
 ## Files
 ### SUNOnline_v1007 Database
 > Google Drive (05/01/2020)
