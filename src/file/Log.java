@@ -50,7 +50,7 @@ public class Log
             }
             case "p": // packet
             {
-                fileName = IniFile.getLogFolder() + "/packet/Login Server/LoginPackets " + formatDate() + ".txt";
+                fileName = IniFile.getLogFolder() + "/Packet/Login Server/LoginPackets " + formatDate() + ".txt";
                 write(fileName, message);
                 break;
             }
@@ -109,7 +109,7 @@ public class Log
     private static void checkDirectory()
     {
         File consoleDirectory = new File(IniFile.getLogFolder() + "/Console/Login Server");
-        File packetDirectory = new File(IniFile.getLogFolder() + "/packet/Login Server");
+        File packetDirectory = new File(IniFile.getLogFolder() + "/Packet/Login Server");
 
         if (!consoleDirectory.exists())
             consoleDirectory.mkdirs();

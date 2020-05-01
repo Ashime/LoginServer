@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="LoginServer">
+  <library name="mssql-jdbc-8.2.2.jre8">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/LoginServer.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mssql-jdbc-8.2.2.jre8.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
