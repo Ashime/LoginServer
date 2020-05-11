@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: main.LoginServer
+Class-Path: libs/mssql-jdbc-8.2.2.jre8.jar libs/netty-all-4.1.49.Final.jar libs/ini4j-0
+ .5.4.jar
+

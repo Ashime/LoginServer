@@ -20,7 +20,7 @@ package main;
 */
 
 import file.io.IniFile;
-import server.NettyNio;
+import server.NioServer;
 import sql.Connect;
 import sql.Query;
 import ui.Console;
@@ -58,7 +58,7 @@ public class LoginServer
         if (!IniFile.isTrustedDevices())
             Console.displayMessage("WARN", "Trusted devices allowed on a user's account will not be checked!");
 
-        NettyNio server = new NettyNio();
+        NioServer server = new NioServer();
         server.start();            // Starts up the C2S and S2S logic and business.
     }
 }

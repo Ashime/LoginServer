@@ -19,7 +19,7 @@ package server.handlers;
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import server.NettyNio;
+import server.NioServer;
 import ui.Console;
 
 import java.util.concurrent.TimeUnit;
@@ -38,7 +38,7 @@ Information:
 public class ResetHandler implements Runnable
 {
     private final int resetTime;
-    private NettyNio server = new NettyNio();
+    private NioServer server = new NioServer();
 
     public ResetHandler(int time) {
         resetTime = time;

@@ -43,7 +43,7 @@ import java.util.logging.Logger;
 
 /*
 GENERAL INFORMATION:
-1. NettyNio.io
+1. NioServer.io
     This 3rd library is being used to improve performance by using less resources,
     and better throughput to lower latency.
     >> Website Link:        https://netty.io/
@@ -56,7 +56,7 @@ the PacketHandler needs a method to handle the exception.
 2. Commenting
 */
 
-public class NettyNio
+public class NioServer
 {
     /*==============================
                  Client
@@ -106,7 +106,6 @@ public class NettyNio
                 @Override
                 protected void initChannel(Channel ch)
                 {
-                    // TODO: IMPORTANT: Need some type of firewall or ip checker to block clients from connecting.
                     ch.pipeline().addLast("macAddressFilter", new MacAddressFilter());
 
                     // UniqueIpFilter only allows one IP per channel, so a client cannot connect more than once.
@@ -148,7 +147,6 @@ public class NettyNio
                 protected void initChannel(Channel ch)
                 {
                     // TODO: Need to add ip filter to only accept ip connects. Basically a WhiteList.
-                    //ch.pipeline().addFirst("serverFirewall", new RuleBasedIpFilter(new ServerFirewall()));
 
                     // Not given a choice on whether to enable it. For security reasons, the Server To Server address will only
                     // accept one connection per IP.
@@ -170,7 +168,7 @@ public class NettyNio
             Console.displayMessage("INFO", "Server connection address - " + serverIP + ":" + serverPort);
         }
         catch (InterruptedException ex) {
-            Logger.getLogger(NettyNio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NioServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

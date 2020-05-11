@@ -47,7 +47,7 @@ public class IniFile
     private static boolean uniqueIpFilter;          // Enable or disable OneIpFilterHandler.
     private static int timeOut;                     // How long a query can wait before timing out (in seconds).
 
-    private static int bufferSize;                  // Buffer size for ByteBuf in NettyNio.
+    private static int bufferSize;                  // Buffer size for ByteBuf in NioServer.
     private static String logFolder;                // Directory location where logs should be placed.
     private static boolean trustedDevices;          // Determines whether trusted devices will be enabled.
     private static String hmacKey;                  // HMAC SHA-512 key.
